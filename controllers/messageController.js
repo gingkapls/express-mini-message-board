@@ -1,26 +1,16 @@
+const { getMessage, insertMessage } = require("../db/queries");
 const formatDate = require("../lib/formatDate");
-const {
-  getMessageByUser,
-  addMessage,
-  findMessageById,
-} = require("../models/messages");
 
-async function getMessageById(req, res) {
+async function getMessageByMessageId(req, res) {
   const { messageId } = req.params;
-  const message = await findMessageById(messageId);
-
-  if (!message) {
-    res.status(404).send("something wrong happened");
-    return;
-  }
-
+  const [message] = await getMessage({ messageId });
   res.render("message", { ...message, formatDate });
 }
 
 async function postMessage(req, res) {
-  const { user, text } = req.body;
-  addMessage({ user, text, date: new Date() });
+  const { username, message } = req.body;
+  insertMessage({ username, message });
   res.redirect("/");
 }
 
-module.exports = { postMessage, getMessageById };
+module.exports = { postMessage, getMessageByMessageId };

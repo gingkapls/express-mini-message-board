@@ -1,13 +1,12 @@
 const { Router } = require("express");
-const formatDate = require("../lib/formatDate");
 const {
   postMessage,
-  getMessageById,
+  getMessageByMessageId,
 } = require("../controllers/messageController");
 
 const router = Router();
 
-router.get("/:messageId", getMessageById);
+router.get("/:messageId", getMessageByMessageId);
 router.post("/", postMessage);
 
 module.exports = router;

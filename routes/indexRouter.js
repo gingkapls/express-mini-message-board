@@ -1,10 +1,11 @@
 const { Router } = require("express");
-const { getAllMessages, addMessage } = require("../models/messages");
 const formatDate = require("../lib/formatDate");
+const { getAllMessages } = require("../db/queries");
 const router = Router();
 
 router.get("/", async (req, res, next) => {
   const messages = await getAllMessages();
+  console.log(messages);
   res.render("index", { title: "Mini-Message Board", messages, formatDate });
 });
 

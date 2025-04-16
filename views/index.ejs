@@ -2,8 +2,8 @@
   <body>
     <h1><%= title %></h1>
     <ul>
-      <% messages.forEach(({user, text, added, id}) => { %> <%-
-      include('message', {user, text, added, id, formatDate}); %> <% }) %>
+      <% messages.forEach(({username, message, date, id}) => { %> <%-
+      include('message', {username, message, date, id, formatDate}); %> <% }) %>
     </ul>
     <a href="/new">New message</a>
     <a href="/">Go home</a>
